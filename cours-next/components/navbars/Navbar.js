@@ -1,18 +1,21 @@
 import React from "react";
 import Link from "next/link";
-import styles from "./Navbar.module.css"
+import styles from "./Navbar.module.css";
 
 export default function Navbar() {
   return (
     <nav className={styles.navbar}>
-      <Link href="/blog/article">
-        <a>Blog</a>
-      </Link>
       <Link href="/">
-        <a>&nbsp;&nbsp;Accueil</a>
+        <a>Accueil</a>
       </Link>
-      <Link href="/contact">
-        <a>&nbsp;&nbsp;Contact</a>
+      <Link href="/listes">
+        <a>Listes</a>
+      </Link>
+      <Link href="/isr">
+        <a>ISR</a>
+      </Link>
+      <Link href="/cours">
+        <a>BTC</a>
       </Link>
     </nav>
   );
