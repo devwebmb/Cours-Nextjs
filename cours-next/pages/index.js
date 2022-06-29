@@ -1,8 +1,28 @@
 import styles from "../styles/Home.module.css";
 import Head from "next/head";
 import { v4 as uuidv4 } from "uuid";
+import { useEffect, useState } from "react";
 
 export default function Home(props) {
+  const [state, setState] = useState("");
+
+  useEffect(() => {
+    newWord();
+  }, []);
+
+  const newWord = () => {
+    fetch("api/vocapi")
+      .then((res) => res.json())
+      .then((data) => setState(data));
+  };
+  console.log(state);
+
+  let ramdomWord;
+  if (state) {
+    const array = state.englishList[0].data;
+    ramdomWord = array[Math.floor(Math.random() * array.length)].en;
+    console.log(ramdomWord);
+  }
   return (
     <>
       <Head>
@@ -10,8 +30,8 @@ export default function Home(props) {
         <title>Titre</title>
       </Head>
       <div className={styles.container}>
-        <h1 className={styles.titre}>Vocabulaire de base</h1>
-        <table className={styles.tableau}>
+        <h1 className={styles.titre}>Mot au hazard</h1>
+        {/* <table className={styles.tableau}>
           <tbody>
             {props.array.map((el) => (
               <tr key={uuidv4()}>
@@ -20,7 +40,11 @@ export default function Home(props) {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
+        <button onClick={newWord} className="btn btn-primary d-block m-auto">
+          Get random word
+        </button>
+        <h2 className="text-center mt-3">{ramdomWord }</h2>
       </div>
     </>
   );
